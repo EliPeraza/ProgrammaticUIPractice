@@ -13,14 +13,19 @@ import UIKit
  button -segue
  */
 
+protocol MainViewDelegate: AnyObject {
+ func seguePressed()
+}
+
 class MainView: UIView {
+  
+  weak var delegate: MainViewDelegate? 
 
   
   lazy var myTextField: UITextField = {
     
     let textField = UITextField()
     textField.backgroundColor = .lightGray
-    textField.text = "Write your message here"
     textField.textAlignment = .center
     textField.textColor = .black
     
@@ -31,13 +36,17 @@ class MainView: UIView {
   lazy var mySegueButton: UIButton = {
     
     let button = UIButton()
-    button.setTitle("Practice!", for: .normal)
+    button.setTitle("Segue", for: .normal)
     button.backgroundColor = .lightGray
-  
+    button.addTarget(self, action: #selector(seguePressed), for: .touchUpInside)
     
     return button
 
   }()
+  
+  @objc func seguePressed() {
+    delegate?.seguePressed()
+  }
   
   override init(frame: CGRect) {
     super.init(frame: UIScreen.main.bounds)

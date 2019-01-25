@@ -17,10 +17,18 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       self.view.backgroundColor = .white
-      self.viewIfLoaded?.addSubview(mainView)
+      self.view.addSubview(mainView)
+      mainView.delegate = self
     }
     
 
+}
 
-
+extension MainViewController: MainViewDelegate {
+  func seguePressed() {
+    let textfieldToPass = DetailedViewController.init(textStringToPass: mainView.myTextField.text ?? "No message entered")
+    navigationController?.pushViewController(textfieldToPass, animated: true)
+  }
+  
+  
 }

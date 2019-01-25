@@ -10,12 +10,23 @@ import UIKit
 
 class DetailedViewController: UIViewController {
 
+  let detailView =  DetailedView()
+  
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-      self.view.backgroundColor = .red 
+      self.view.addSubview(detailView)
+      self.view.backgroundColor = .white
     }
     
-
- 
+  init(textStringToPass: String){
+    super.init(nibName: nil, bundle: nil)
+    detailView.detailedLabel.text = textStringToPass
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
 
 }
